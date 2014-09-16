@@ -1,0 +1,21 @@
+{
+  "name": "angular-freshdesk",
+  "version": "0.0.0",
+  "authors": [
+    "Raymond Jelierse <raymond@shareworks.nl>"
+  ],
+  "description": "AngularJS module for integration with Freshdesk",
+  "main": "src/freshdesk.js",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "freshdesk",
+    "freshwidget",
+    "freshchat"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/shareworks/angular-freshdesk",
+  "devDependencies": {
+    "angular": "~1.2.0"
+  }
+}
