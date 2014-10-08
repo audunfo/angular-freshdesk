@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "description": "AngularJS module for FreshDesk",
   "main": "Gruntfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git://github.com/shareworks/angular-freshdesk.git"
@@ -18,19 +15,19 @@
   ],
   "author": "Raymond Jelierse <raymond@shareworks.nl>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/shareworks/angular-freshdesk/issues"
-  },
+  "bugs": "https://github.com/shareworks/angular-freshdesk/issues",
   "homepage": "https://github.com/shareworks/angular-freshdesk",
   "devDependencies": {
     "bower": "~1.3.0",
     "load-grunt-tasks": "~0.2",
     "grunt": "~0.4.0",
-    "grunt-contrib-concat": "~0.3",
-    "grunt-contrib-uglify": "~0.2",
-    "grunt-contrib-jshint": "~0.4",
-    "grunt-contrib-clean": "~0.5",
-    "grunt-ngdocs": "~0.1",
-    "grunt-contrib-bump": "git://github.com/gruntjs/grunt-contrib-bump"
+    "grunt-contrib-concat": "~0.5",
+    "grunt-contrib-uglify": "~0.6",
+    "grunt-contrib-jshint": "~0.10",
+    "grunt-contrib-clean": "~0.6",
+    "grunt-ngdocs": "~0.2",
+    "grunt-bump": "*",
+    "child-process-promise": "~0.1.0",
+    "grunt-conventional-changelog": "~1.1.0"
   }
 }
