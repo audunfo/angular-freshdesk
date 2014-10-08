@@ -155,6 +155,16 @@ function $freshChatProvider () {
       begin_chat: 'Begin chat'
     };
 
+    /**
+     * @ngdoc method
+     * @name sw.freshdesk-chat.$freshChat#init
+     * @methodOf sw.freshdesk-chat.$freshChat
+     *
+     * @description
+     * Inject the FreshChat objects into the DOM.
+     *
+     * This adds the remote script and stylesheet and sets the `freshchat_setting` data on the `$window`.
+     */
     $freshChat.init = function () {
       if (angular.isUndefined(clientId))
         throw new Error('FreshChat client id is not set.');
