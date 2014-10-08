@@ -1,108 +1,113 @@
-(function (angular) {
-  'use strict';
+'use strict';
 
-  angular.module('freshdesk', ['ng', 'freshdesk.chat'])
-    .provider('FreshDesk', function (FreshDeskChatProvider) {
-      var options = {
-        account: null,
-        product: null,
-        feedback: false,
-        chat: false,
-        secure: false,
-        nameField: 'name'
-      };
+/**
+ * @ngdoc object
+ * @name freshdesk.$freshDeskProvider
+ *
+ * @requires freshdesk.chat.$freshChatProvider
+ * @requires freshdesk.widget.$freshWidgetProvider
+ *
+ * @description
+ * Utility service for the different FreshDesk components.
+ *
+ * Using this provider, you can configure the common settings for all components at once.
+ */
+$freshDeskProvider.$inject = ['$freshChatProvider', '$freshWidgetProvider'];
+function $freshDeskProvider ($freshChatProvider, $freshWidgetProvider) {
+  var chat = false, widget = false;
 
-      this.setAccount = function (account) {
-        options.account = account;
+  /**
+   * @ngdoc function
+   * @name freshdesk.$freshDeskProvider#setAccount
+   * @methodOf freshdesk.$freshDeskProvider
+   *
+   * @param {string} account Your account name
+   *
+   * @description
+   * Set the FreshDesk account name. Internally, this will set the link to your support portal.
+   */
+  this.setAccount = function (account) {
+    $freshChatProvider.setAccount(account);
+    $freshWidgetProvider.setAccount(account);
+  };
 
-        FreshDeskChatProvider.setAccount(account);
-      };
+  /**
+   * @ngdoc function
+   * @name freshdesk.$freshDeskProvider#setAccountUrl
+   * @methodOf freshdesk.$freshDeskProvider
+   *
+   * @param {string} url Your account URL
+   *
+   * @description
+   * Set the URL to your FreshDesk support portal.
+   */
+  this.setAccountUrl = function (url) {
+    $freshChatProvider.setAccountUrl(url);
+    $freshWidgetProvider.setAccountUrl(url);
+  };
 
-      this.setProduct = function (product) {
-        options.product = product;
-      };
+  /**
+   * @ngdoc function
+   * @name freshdesk.$freshDeskProvider#enableChat
+   * @methodOf freshdesk.$freshDeskProvider
+   *
+   * @param {boolean} [enabled=true] Whether to enable FreshChat
+   *
+   * @description
+   * Enable the FreshChat component.
+   */
+  this.enableChat = function (enabled) {
+    chat = angular.isDefined(enabled) ? enabled : true;
+  };
 
-      this.setNameField = function (name) {
-        options.nameField = name;
-      };
+  /**
+   * @ngdoc function
+   * @name freshdesk.$freshDeskProvider#enableWidget
+   * @methodOf freshdesk.$freshDeskProvider
+   *
+   * @param {boolean} [enabled=true] Whether to enable FreshWidget
+   *
+   * @description
+   * Enable the FreshWidget component.
+   */
+  this.enableWidget = function (enabled) {
+    widget = angular.isDefined(enabled) ? enabled : true;
+  };
 
-      this.enableChat = function (enable) {
-        options.chat = angular.isDefined(enable) ? enable : true;
-      };
+  /**
+   * @ngdoc object
+   * @name freshdesk.$freshDesk
+   *
+   * @requires freshdesk.chat.$freshChat
+   * @requires freshdesk.widget.$freshWidget
+   *
+   * @description
+   * The wrapper service for the FreshDesk components.
+   */
+  this.$get = $get;
+  $get.$inject = ['$freshChat', '$freshWidget'];
+  function $get ($freshChat, $freshWidget) {
+    var $freshDesk = {};
 
-      this.enableFeedback = function (enable) {
-        options.feedback = angular.isDefined(enable) ? enable : true;
-      };
+    /**
+     * @ngdoc function
+     * @name freshdesk.$freshDesk#init
+     * @methodOf freshdesk.$freshDesk
+     *
+     * @description
+     * Initializes the enabled FreshDesk components.
+     */
+    $freshDesk.init = function () {
+      if (chat)
+        $freshChat.init();
 
-      function buildQueryString (requester, name) {
-        var query = 'helpdesk_ticket[requester]=' + encodeURIComponent(requester);
-        query += '&disable[requester]=true';
+      if (widget)
+        $freshWidget.init();
+    };
 
-        if (options.product) {
-          query += '&helpdesk_ticket[product]=' + options.product;
-        }
+    return $freshDesk;
+  }
+}
 
-        if (name) {
-          query += '&helpdesk_ticket[custom_field][' + options.nameField + ']=' + name;
-        }
-
-        return query;
-      }
-
-      function getWidgetSrc () {
-        if (options.secure)
-          return 'https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js';
-        else
-          return 'http://assets.freshdesk.com/widget/freshwidget.js';
-      }
-
-      // Service constructor
-      this.$get = function ($window, $document, $location, FreshDeskChat) {
-        /* global FreshWidget */
-        if (!options.account) return {};
-
-        options.secure = $location.protocol() === 'https';
-
-        var body = $document[0].getElementsByTagName('body')[0]
-          , settings = {
-            widgetType: 'popup',
-            buttonType: 'text',
-            buttonText: 'Support',
-            buttonColor: 'white',
-            buttonBg: '#006063',
-            alignment: '2',
-            offset: '-2000px',
-            formHeight: '500px',
-            url: 'https://' + options.account + '.freshdesk.com'
-          };
-
-        function addWidgetScript () {
-          var script = $document[0].createElement('script');
-
-          script.type = 'text/javascript';
-          script.async = true;
-          script.src = getWidgetSrc();
-          script.onload = function () {
-            FreshWidget.init('', settings);
-          };
-
-          body.appendChild(script);
-        }
-
-        function identify (identity, name) {
-          if (!options.feedback) throw new Error('Feedback is disabled, not loading the widget.');
-
-          var data = angular.extend({queryString: buildQueryString(identity, name)}, settings);
-
-          FreshWidget.init('', data);
-        }
-
-        if (options.feedback) addWidgetScript();
-        if (options.chat) FreshDeskChat.inject();
-
-        return {
-          identify: identify
-        }
-      }
-    })
-})(angular);
+angular.module('freshdesk', ['freshdesk.widget', 'freshdesk.chat'])
+  .provider('$freshDesk', $freshDeskProvider);
