@@ -27,9 +27,7 @@
     ".jshintrc-base",
     "bower.json",
     "Gruntfile.js",
-    "LICENSE.md",
-    "package.json",
-    "README.md"
+    "package.json"
   ],
   "dependencies": {
     "angular": "~1.2.0"
