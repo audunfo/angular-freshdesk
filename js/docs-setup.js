@@ -28,7 +28,7 @@ NG_DOCS={
       "type": "object",
       "moduleName": "sw.freshdesk-chat",
       "shortDescription": "The $freshChat service is a wrapper to inject the FreshChat widget into the page.",
-      "keywords": "$document $freshchat $location $window allows alter api class freshchat freshdesk-chat inject labels object service sw sw-freshdesk-chat-freshchat-page translate widget wrapper"
+      "keywords": "$document $freshchat $location $window adds allows alter api class data dom freshchat freshchat_setting freshdesk-chat init inject labels method object objects remote script service sets stylesheet sw sw-freshdesk-chat-freshchat-page translate widget wrapper"
     },
     {
       "section": "api",
