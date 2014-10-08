@@ -1,11 +1,11 @@
-'use strict';
-
 /**
  * @ngdoc object
- * @name freshdesk.widget.$freshWidgetProvider
+ * @name sw.freshdesk-widget.$freshWidgetProvider
  */
 $freshWidgetProvider.$inject = [];
 function $freshWidgetProvider () {
+  'use strict';
+
   var scriptUrl,
       accountUrl,
       assetUrl,
@@ -68,8 +68,8 @@ function $freshWidgetProvider () {
 
   /**
    * @ngdoc function
-   * @name freshdesk.widget.$freshWidgetProvider#setScriptUrl
-   * @methodOf freshdesk.widget.$freshWidgetProvider
+   * @name sw.freshdesk-widget.$freshWidgetProvider#setScriptUrl
+   * @methodOf sw.freshdesk-widget.$freshWidgetProvider
    *
    * @param {string} url The URL to the freshwidget.js file
    *
@@ -82,8 +82,8 @@ function $freshWidgetProvider () {
 
   /**
    * @ngdoc function
-   * @name freshdesk.widget.$freshWidgetProvider#setAccount
-   * @methodOf freshdesk.widget.$freshWidgetProvider
+   * @name sw.freshdesk-widget.$freshWidgetProvider#setAccount
+   * @methodOf sw.freshdesk-widget.$freshWidgetProvider
    *
    * @param {string} account Your account name
    *
@@ -96,8 +96,8 @@ function $freshWidgetProvider () {
 
   /**
    * @ngdoc function
-   * @name freshdesk.widget.$freshWidgetProvider#setAccountUrl
-   * @methodOf freshdesk.widget.$freshWidgetProvider
+   * @name sw.freshdesk-widget.$freshWidgetProvider#setAccountUrl
+   * @methodOf sw.freshdesk-widget.$freshWidgetProvider
    *
    * @param {string} url Your account URL
    *
@@ -110,8 +110,8 @@ function $freshWidgetProvider () {
 
   /**
    * @ngdoc function
-   * @name freshdesk.widget.$freshWidgetProvider#setOptions
-   * @methodOf freshdesk.widget.$freshWidgetProvider
+   * @name sw.freshdesk-widget.$freshWidgetProvider#setOptions
+   * @methodOf sw.freshdesk-widget.$freshWidgetProvider
    *
    * @param {object} opts The options object
    *
@@ -124,8 +124,8 @@ function $freshWidgetProvider () {
 
   /**
    * @ngdoc function
-   * @name freshdesk.widget.$freshWidgetProvider#setProduct
-   * @methodOf freshdesk.widget.$freshWidgetProvider
+   * @name sw.freshdesk-widget.$freshWidgetProvider#setProduct
+   * @methodOf sw.freshdesk-widget.$freshWidgetProvider
    *
    * @param {string} prod The product id
    *
@@ -138,7 +138,7 @@ function $freshWidgetProvider () {
 
   /**
    * @ngdoc object
-   * @name freshdesk.widget.$freshWidget
+   * @name sw.freshdesk-widget.$freshWidget
    *
    * @requires $q
    * @requires $location
@@ -156,8 +156,8 @@ function $freshWidgetProvider () {
 
     /**
      * @ngdoc function
-     * @name freshdesk.widget.$freshWidget#init
-     * @methodOf freshdesk.widget.$freshWidget
+     * @name sw.freshdesk-widget.$freshWidget#init
+     * @methodOf sw.freshdesk-widget.$freshWidget
      *
      * @return {promise} A promise that will resolve when the script has been loaded
      *
@@ -191,8 +191,8 @@ function $freshWidgetProvider () {
 
     /**
      * @ngdoc function
-     * @name freshdesk.widget.$freshWidget#show
-     * @methodOf freshdesk.widget.$freshWidget
+     * @name sw.freshdesk-widget.$freshWidget#destroy
+     * @methodOf sw.freshdesk-widget.$freshWidget
      *
      * @description Destroy the FreshWidget.
      */
@@ -204,8 +204,8 @@ function $freshWidgetProvider () {
 
     /**
      * @ngdoc function
-     * @name freshdesk.widget.$freshWidget#inject
-     * @methodOf freshdesk.widget.$freshWidget
+     * @name sw.freshdesk-widget.$freshWidget#addOptions
+     * @methodOf sw.freshdesk-widget.$freshWidget
      *
      * @param {object} opts The options object
      *
@@ -217,8 +217,8 @@ function $freshWidgetProvider () {
 
     /**
      * @ngdoc function
-     * @name freshdesk.widget.$freshWidget#identify
-     * @methodOf freshdesk.widget.$freshWidget
+     * @name sw.freshdesk-widget.$freshWidget#identify
+     * @methodOf sw.freshdesk-widget.$freshWidget
      *
      * @param {string}  emailAddress The requester's email address
      * @param {object} [values=null] Extra fields to pass to the widget
@@ -234,8 +234,8 @@ function $freshWidgetProvider () {
 
     /**
      * @ngdoc function
-     * @name freshdesk.widget.$freshWidget#show
-     * @methodOf freshdesk.widget.$freshWidget
+     * @name sw.freshdesk-widget.$freshWidget#show
+     * @methodOf sw.freshdesk-widget.$freshWidget
      *
      * @description Show the widget form
      */
@@ -245,8 +245,8 @@ function $freshWidgetProvider () {
 
     /**
      * @ngdoc function
-     * @name freshdesk.widget.$freshWidget#hide
-     * @methodOf freshdesk.widget.$freshWidget
+     * @name sw.freshdesk-widget.$freshWidget#hide
+     * @methodOf sw.freshdesk-widget.$freshWidget
      *
      * @description Hide the widget form
      */
@@ -258,5 +258,13 @@ function $freshWidgetProvider () {
   }
 }
 
-angular.module('freshdesk.widget', ['ng'])
+/**
+ * @ngdoc overview
+ * @name sw.freshdesk-widget
+ *
+ * @description
+ *
+ * This module adds FreshWidget support to AngularJS.
+ */
+angular.module('sw.freshdesk-widget', ['ng'])
   .provider('$freshWidget', $freshWidgetProvider);

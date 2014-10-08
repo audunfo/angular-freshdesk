@@ -1,11 +1,9 @@
-'use strict';
-
 /**
  * @ngdoc object
- * @name freshdesk.$freshDeskProvider
+ * @name sw.freshdesk.$freshDeskProvider
  *
- * @requires freshdesk.chat.$freshChatProvider
- * @requires freshdesk.widget.$freshWidgetProvider
+ * @requires sw.freshdesk-chat.$freshChatProvider
+ * @requires sw.freshdesk-widget.$freshWidgetProvider
  *
  * @description
  * Utility service for the different FreshDesk components.
@@ -14,12 +12,14 @@
  */
 $freshDeskProvider.$inject = ['$freshChatProvider', '$freshWidgetProvider'];
 function $freshDeskProvider ($freshChatProvider, $freshWidgetProvider) {
+  'use strict';
+
   var chat = false, widget = false;
 
   /**
    * @ngdoc function
-   * @name freshdesk.$freshDeskProvider#setAccount
-   * @methodOf freshdesk.$freshDeskProvider
+   * @name sw.freshdesk.$freshDeskProvider#setAccount
+   * @methodOf sw.freshdesk.$freshDeskProvider
    *
    * @param {string} account Your account name
    *
@@ -33,8 +33,8 @@ function $freshDeskProvider ($freshChatProvider, $freshWidgetProvider) {
 
   /**
    * @ngdoc function
-   * @name freshdesk.$freshDeskProvider#setAccountUrl
-   * @methodOf freshdesk.$freshDeskProvider
+   * @name sw.freshdesk.$freshDeskProvider#setAccountUrl
+   * @methodOf sw.freshdesk.$freshDeskProvider
    *
    * @param {string} url Your account URL
    *
@@ -48,8 +48,8 @@ function $freshDeskProvider ($freshChatProvider, $freshWidgetProvider) {
 
   /**
    * @ngdoc function
-   * @name freshdesk.$freshDeskProvider#enableChat
-   * @methodOf freshdesk.$freshDeskProvider
+   * @name sw.freshdesk.$freshDeskProvider#enableChat
+   * @methodOf sw.freshdesk.$freshDeskProvider
    *
    * @param {boolean} [enabled=true] Whether to enable FreshChat
    *
@@ -62,8 +62,8 @@ function $freshDeskProvider ($freshChatProvider, $freshWidgetProvider) {
 
   /**
    * @ngdoc function
-   * @name freshdesk.$freshDeskProvider#enableWidget
-   * @methodOf freshdesk.$freshDeskProvider
+   * @name sw.freshdesk.$freshDeskProvider#enableWidget
+   * @methodOf sw.freshdesk.$freshDeskProvider
    *
    * @param {boolean} [enabled=true] Whether to enable FreshWidget
    *
@@ -76,10 +76,10 @@ function $freshDeskProvider ($freshChatProvider, $freshWidgetProvider) {
 
   /**
    * @ngdoc object
-   * @name freshdesk.$freshDesk
+   * @name sw.freshdesk.$freshDesk
    *
-   * @requires freshdesk.chat.$freshChat
-   * @requires freshdesk.widget.$freshWidget
+   * @requires sw.freshdesk-chat.$freshChat
+   * @requires sw.freshdesk-widget.$freshWidget
    *
    * @description
    * The wrapper service for the FreshDesk components.
@@ -91,8 +91,8 @@ function $freshDeskProvider ($freshChatProvider, $freshWidgetProvider) {
 
     /**
      * @ngdoc function
-     * @name freshdesk.$freshDesk#init
-     * @methodOf freshdesk.$freshDesk
+     * @name sw.freshdesk.$freshDesk#init
+     * @methodOf sw.freshdesk.$freshDesk
      *
      * @description
      * Initializes the enabled FreshDesk components.
@@ -109,5 +109,13 @@ function $freshDeskProvider ($freshChatProvider, $freshWidgetProvider) {
   }
 }
 
-angular.module('freshdesk', ['freshdesk.widget', 'freshdesk.chat'])
+/**
+ * @ngdoc overview
+ * @name sw.freshdesk
+ *
+ * @description
+ *
+ * The `sw.freshdesk` module adds integration of {@link http://freshdesk.com FreshDesk} into AngularJS.
+ */
+angular.module('sw.freshdesk', ['sw.freshdesk-widget', 'sw.freshdesk-chat'])
   .provider('$freshDesk', $freshDeskProvider);

@@ -1,17 +1,17 @@
-'use strict';
-
 /**
  * @ngdoc object
- * @name freshdesk.chat.$freshChatProvider
+ * @name sw.freshdesk-chat.$freshChatProvider
  *
  * @description
  * The provider for the `$freshChat` service. Allows boot-time configuration of the FreshChat widget.
  */
 $freshChatProvider.$inject = [];
 function $freshChatProvider () {
+  'use strict';
+
   var accountUrl,
-      client_id,
-      client_secret,
+      clientId,
+      clientSecret,
       labels = {},
       secure = false,
       options = {};
@@ -32,12 +32,12 @@ function $freshChatProvider () {
 
   function getSettings () {
     var settings = angular.copy(options);
-    settings.fc_id = client_id;
+    settings.fc_id = clientId;
     settings.nodeurl = 'chat.freshdesk.com';
     settings.environment = 'production';
 
-    if (angular.isDefined(client_secret))
-      settings.fc_se = client_secret;
+    if (angular.isDefined(clientSecret))
+      settings.fc_se = clientSecret;
 
     angular.extend(settings, labels);
 
@@ -46,8 +46,8 @@ function $freshChatProvider () {
 
   /**
    * @ngdoc function
-   * @name freshdesk.chat.$freshChatProvider#setAccount
-   * @methodOf freshdesk.chat.$freshChatProvider
+   * @name sw.freshdesk-chat.$freshChatProvider#setAccount
+   * @methodOf sw.freshdesk-chat.$freshChatProvider
    *
    * @param {string} account Your account name
    *
@@ -60,8 +60,8 @@ function $freshChatProvider () {
 
   /**
    * @ngdoc function
-   * @name freshdesk.chat.$freshChatProvider#setAccountUrl
-   * @methodOf freshdesk.chat.$freshChatProvider
+   * @name sw.freshdesk-chat.$freshChatProvider#setAccountUrl
+   * @methodOf sw.freshdesk-chat.$freshChatProvider
    *
    * @param {string} url Your account URL
    *
@@ -74,8 +74,8 @@ function $freshChatProvider () {
 
   /**
    * @ngdoc function
-   * @name freshdesk.chat.$freshChatProvider#setCredentials
-   * @methodOf freshdesk.chat.$freshChatProvider
+   * @name sw.freshdesk-chat.$freshChatProvider#setCredentials
+   * @methodOf sw.freshdesk-chat.$freshChatProvider
    *
    * @param {string}  id      The FreshChat client id
    * @param {string} [secret] The FreshChat client secret
@@ -84,13 +84,13 @@ function $freshChatProvider () {
    * Set the FreshChat credentials.
    */
   this.setCredentials = function (id, secret) {
-    client_id = id;
-    client_secret = secret;
+    clientId = id;
+    clientSecret = secret;
   };
 
   /**
    * @ngdoc object
-   * @name freshdesk.chat.$freshChat
+   * @name sw.freshdesk-chat.$freshChat
    *
    * @requires $location
    * @requires $document
@@ -156,7 +156,7 @@ function $freshChatProvider () {
     };
 
     $freshChat.init = function () {
-      if (angular.isUndefined(client_id))
+      if (angular.isUndefined(clientId))
         throw new Error('FreshChat client id is not set.');
 
       injectSettings();
@@ -168,5 +168,13 @@ function $freshChatProvider () {
   }
 }
 
-angular.module('freshdesk.chat', ['ng'])
+/**
+ * @ngdoc overview
+ * @name sw.freshdesk-chat
+ *
+ * @description
+ *
+ * This module adds FreshChat support to AngularJS.
+ */
+angular.module('sw.freshdesk-chat', ['ng'])
   .provider('$freshChat', $freshChatProvider);
