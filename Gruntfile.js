@@ -74,11 +74,11 @@ module.exports = function (grunt) {
       options: {
         dest: '<%= dir.docs %>',
         html5Mode: false,
-        title: 'Freshdesk',
-        startPage: '/api/freshdesk.$freshDesk'
+        title: 'angular-freshdesk',
+        navTemplate: 'ngdoc/templates/navbar.html'
       },
       api: {
-        src: ['<%= dir.src %>/*.js'],
+        src: ['<%= dir.source %>/*.js'],
         title: 'API Reference'
       }
     }
